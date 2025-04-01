@@ -14,8 +14,9 @@ class ShoppingList
 
         if ($command === 'añadir') {
             $this->addItem($parts);
+        } elseif ($command === 'eliminar') {
+            return $this->removeItem($parts);
         }
-
         return $this->formatList();
     }
 
@@ -24,9 +25,21 @@ class ShoppingList
         if (empty($parts)) return;
 
         $name = strtolower($parts[0]);
-        $quantity = isset($parts[1]) && is_numeric($parts[1]) ? (int) $parts[1] : 1;
+        $cantidad = isset($parts[1]) && is_numeric($parts[1]) ? (int) $parts[1] : 1;
 
-        $this->items[$name] = ($this->items[$name] ?? 0) + $quantity;
+        $this->items[$name] = ($this->items[$name] ?? 0) + $cantidad;
+    }
+
+    private function removeItem(array $parts): string
+    {
+        if (empty($parts)) return $this->formatList();
+        $name = strtolower($parts[0]);
+        if (isset($this->items[$name]))
+        {
+            unset($this->items[$name]);
+            return $this->formatList();
+        }
+        return "El producto seleccionado no existe";
     }
 
     private function formatList(): string
@@ -34,6 +47,6 @@ class ShoppingList
         if (!$this->items) return "";
 
         uksort($this->items, 'strcasecmp');
-        return implode(", ", array_map(fn($name, $quantity) => "$name x$quantity", array_keys($this->items), $this->items));
+        return implode(", ", array_map(fn($name, $cantidad) => "$name x$cantidad", array_keys($this->items), $this->items));
     }
 }
