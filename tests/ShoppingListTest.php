@@ -9,14 +9,16 @@ class ShoppingListTest extends TestCase
 {
     private ShoppingList $list;
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         $this->list = new ShoppingList();
     }
 
     /**
      * @test
      */
-    public function givenItemAddToList(): void {
+    public function givenItemAddToList(): void
+    {
         $this->assertEquals("pan x1", $this->list->process("añadir pan"));
         $this->assertEquals("leche x2, pan x1", $this->list->process("añadir leche 2"));
         $this->assertEquals("leche x2, pan x3", $this->list->process("añadir Pan 2"));
@@ -25,7 +27,8 @@ class ShoppingListTest extends TestCase
     /**
      * @test
      */
-    public function givenItemRemoveFromList(): void {
+    public function givenItemRemoveFromList(): void
+    {
         $this->list->process("añadir pan");
         $this->list->process("añadir leche 2");
         $this->assertEquals("El producto seleccionado no existe", $this->list->process("eliminar arroz"));
@@ -35,7 +38,8 @@ class ShoppingListTest extends TestCase
     /**
      * @test
      */
-    public function givenVaciarReturnsEmptyList(): void {
+    public function givenVaciarReturnsEmptyList(): void
+    {
         $this->list->process("añadir pan");
         $this->list->process("añadir leche 2");
         $this->assertEquals("", $this->list->process("vaciar"));
@@ -44,8 +48,8 @@ class ShoppingListTest extends TestCase
     /**
      * @test
      */
-    public function givenEmptyListReturnEmptyString(): void {
+    public function givenEmptyListReturnEmptyString(): void
+    {
         $this->assertEquals("", $this->list->process("vaciar"));
     }
-
 }
