@@ -16,6 +16,8 @@ class ShoppingList
             $this->addItem($parts);
         } elseif ($command === 'eliminar') {
             return $this->removeItem($parts);
+        } elseif ($command === 'vaciar') {
+            $this->clearList();
         }
         return $this->formatList();
     }
@@ -40,6 +42,11 @@ class ShoppingList
             return $this->formatList();
         }
         return "El producto seleccionado no existe";
+    }
+
+    private function clearList(): void
+    {
+        $this->items = [];
     }
 
     private function formatList(): string
