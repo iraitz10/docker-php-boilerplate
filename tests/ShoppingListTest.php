@@ -40,4 +40,12 @@ class ShoppingListTest extends TestCase
         $this->list->process("añadir leche 2");
         $this->assertEquals("", $this->list->process("vaciar"));
     }
+
+    /**
+     * @test
+     */
+    public function givenEmptyListReturnEmptyString(): void {
+        $this->assertEquals("", $this->list->process("vaciar"));
+    }
+
 }
