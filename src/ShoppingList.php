@@ -12,13 +12,15 @@ class ShoppingList
 
         $command = strtolower(array_shift($parts));
 
-        if ($command === 'añadir') {
+        if ($command === 'añadir')
             $this->addItem($parts);
-        } elseif ($command === 'eliminar') {
+
+        elseif ($command === 'eliminar')
             return $this->removeItem($parts);
-        } elseif ($command === 'vaciar') {
+
+        elseif ($command === 'vaciar')
             $this->clearList();
-        }
+        
         return $this->formatList();
     }
 
