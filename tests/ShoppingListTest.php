@@ -31,4 +31,13 @@ class ShoppingListTest extends TestCase
         $this->assertEquals("El producto seleccionado no existe", $this->list->process("eliminar arroz"));
         $this->assertEquals("leche x2", $this->list->process("eliminar pan"));
     }
+
+    /**
+     * @test
+     */
+    public function givenVaciarReturnsEmptyList(): void {
+        $this->list->process("añadir pan");
+        $this->list->process("añadir leche 2");
+        $this->assertEquals("", $this->list->process("vaciar"));
+    }
 }
